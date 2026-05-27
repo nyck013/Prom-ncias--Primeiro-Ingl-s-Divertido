@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronúncias – Primeiro Inglês Divertido</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow:      #fbbf24;
+    --yellow-dark: #e6a800;
+    --blue:        #004ecd;
+    --blue-light:  #a4c6ff;
+    --blue-pale:   #deeaff;
+    --white:       #ffffff;
+    --text:        #1a2a4a;
+    --muted:       #6b7a99;
+    --page-bg:     #eef4ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--blue);
+    position: relative;
+    overflow: hidden;
+    padding: 40px 24px 72px;
+    text-align: center;
+  }
+  header::before, header::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.13;
+  }
+  header::before {
+    width: 340px; height: 340px;
+    background: var(--blue-light);
+    top: -120px; left: -90px;
+  }
+  header::after {
+    width: 220px; height: 220px;
+    background: var(--yellow);
+    bottom: -70px; right: -50px;
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .brand-badge {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--blue);
+    font-family: 'Baloo 2', cursive;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 18px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+  }
+
+  header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  header h1 span { color: var(--yellow); }
+
+  header p {
+    color: var(--blue-light);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .wave svg { display: block; width: 100%; }
+  .wave path { fill: var(--page-bg); }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    max-width: 540px;
+    margin: -20px auto 28px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 14px 20px 14px 50px;
+    border: 2.5px solid var(--blue-light);
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    background: var(--white);
+    box-shadow: 0 6px 24px rgba(0,78,205,0.12);
+    outline: none;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .search-wrap input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 6px 24px rgba(0,78,205,0.22);
+  }
+  .search-wrap input::placeholder { color: var(--blue-light); }
+  .search-icon {
+    position: absolute;
+    left: 36px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    pointer-events: none;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 16px;
+    margin-bottom: 28px;
+  }
+  .tab {
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    border: 2px solid var(--blue-light);
+    background: var(--white);
+    color: var(--blue);
+    transition: all 0.18s;
+    box-shadow: 0 2px 8px rgba(0,78,205,0.07);
+  }
+  .tab:hover { background: var(--blue-pale); border-color: var(--blue); }
+  .tab.active {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+    box-shadow: 0 4px 14px rgba(0,78,205,0.3);
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
+    gap: 18px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 18px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 20px rgba(0,78,205,0.09);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 2px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    animation: popIn 0.4s cubic-bezier(.26,1.4,.46,1) both;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,78,205,0.15);
+    border-color: var(--blue-light);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.88) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* emoji */
+  .emoji-circle {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--blue-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    border: 2px solid var(--blue-light);
+  }
+
+  /* texto central */
+  .card-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .card-word {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .translation {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 1px;
+  }
+
+  /* botão play */
+  .play-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--yellow);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--blue);
+    font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(251,191,36,0.45);
+    transition: transform 0.15s, background 0.15s;
+  }
+  .play-btn:hover { transform: scale(1.12); background: var(--yellow-dark); }
+  .play-btn:active { transform: scale(0.95); }
+
+  /* ── EMPTY ── */
+  .empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .empty span { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding: 0 20px;
+  }
+  .footer p {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1rem;
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .footer small {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="brand-badge">🎵 Pronúncias em Inglês</div>
+    <h1>Primeiro Inglês<br><span>Divertido!</span></h1>
+    <p>Ouça, repita e aprenda a falar cada palavra em inglês 🎉</p>
+  </div>
+</header>
+<div class="wave">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;">
+    <path d="M0,48 C240,0 480,48 720,24 C960,0 1200,48 1440,16 L1440,48 Z"/>
+  </svg>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" placeholder="Buscar palavra em inglês ou português…" oninput="filterCards()">
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab active" onclick="filterTab('all',this)">🌟 Todos</button>
+  <button class="tab" onclick="filterTab('colors',this)">🎨 Colors</button>
+  <button class="tab" onclick="filterTab('family',this)">👨‍👩‍👧 Family</button>
+  <button class="tab" onclick="filterTab('fruits',this)">🍎 Fruits</button>
+  <button class="tab" onclick="filterTab('animals',this)">🐾 Animals</button>
+  <button class="tab" onclick="filterTab('numbers',this)">🔢 Numbers</button>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>Keep practicing! 🌟</p>
+  <small>Primeiro Inglês Divertido</small>
+</div>
+
+<script>
+const words = [
+  // ── COLORS (9) ──
+  { id:1,  cat:'colors',  emoji:'🖤',  word:'Black',    translation:'Preto',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081437/ElevenLabs_2026-04-22T17_19_04_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_uqbzyn.mp3' },
+  { id:2,  cat:'colors',  emoji:'🤍',  word:'White',    translation:'Branco',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081444/ElevenLabs_2026-04-22T17_19_28_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_hobji4.mp3' },
+  { id:3,  cat:'colors',  emoji:'❤️',  word:'Red',      translation:'Vermelho', audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081410/ElevenLabs_2026-04-22T16_58_33_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_1_knmwnv.mp3' },
+  { id:4,  cat:'colors',  emoji:'🟠',  word:'Orange',   translation:'Laranja',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081430/ElevenLabs_2026-04-22T17_18_25_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_xddvox.mp3' },
+  { id:5,  cat:'colors',  emoji:'💚',  word:'Green',    translation:'Verde',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081420/ElevenLabs_2026-04-22T17_18_08_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_umsmmc.mp3' },
+  { id:6,  cat:'colors',  emoji:'💙',  word:'Blue',     translation:'Azul',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081416/ElevenLabs_2026-04-22T17_01_31_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_pwn4yt.mp3' },
+  { id:7,  cat:'colors',  emoji:'🩷',  word:'Pink',     translation:'Rosa',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081440/ElevenLabs_2026-04-22T17_20_00_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_btzotq.mp3' },
+  { id:8,  cat:'colors',  emoji:'💛',  word:'Yellow',   translation:'Amarelo',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081423/ElevenLabs_2026-04-22T17_22_23_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_1_rvl1oq.mp3' },
+  { id:9,  cat:'colors',  emoji:'🟣',  word:'Purple',   translation:'Roxo',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081433/ElevenLabs_2026-04-22T17_18_41_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_jnictv.mp3' },
+
+  // ── ANIMALS (7) ──
+  { id:10, cat:'animals', emoji:'🦁',  word:'Lion',     translation:'Leão',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081447/ElevenLabs_2026-04-23T23_46_29_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_irf2zw.mp3' },
+  { id:11, cat:'animals', emoji:'🐶',  word:'Dog',      translation:'Cachorro', audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081451/ElevenLabs_2026-04-23T23_46_45_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_bozjhz.mp3' },
+  { id:12, cat:'animals', emoji:'🐱',  word:'Cat',      translation:'Gato',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081454/ElevenLabs_2026-04-23T23_46_53_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_t0g8iu.mp3' },
+  { id:13, cat:'animals', emoji:'🐒',  word:'Monkey',   translation:'Macaco',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081458/ElevenLabs_2026-04-23T23_47_15_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_k69ohx.mp3' },
+  { id:14, cat:'animals', emoji:'🐦',  word:'Bird',     translation:'Pássaro',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081461/ElevenLabs_2026-04-23T23_47_32_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_yzhmva.mp3' },
+  { id:15, cat:'animals', emoji:'🐘',  word:'Elephant', translation:'Elefante', audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081465/ElevenLabs_2026-04-23T23_47_45_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_zr6bzs.mp3' },
+  { id:16, cat:'animals', emoji:'🐠',  word:'Fish',     translation:'Peixe',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081469/ElevenLabs_2026-04-23T23_48_40_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_rvfofg.mp3' },
+
+  // ── FRUITS (5) ──
+  { id:17, cat:'fruits',  emoji:'🍌',  word:'Banana',      translation:'Banana',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079819/ElevenLabs_2026-04-23T23_49_23_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_h2yape.mp3' },
+  { id:18, cat:'fruits',  emoji:'🍊',  word:'Orange',      translation:'Laranja',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777081430/ElevenLabs_2026-04-22T17_18_25_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_xddvox.mp3' },
+  { id:19, cat:'fruits',  emoji:'🍇',  word:'Grape',       translation:'Uva',      audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079817/ElevenLabs_2026-04-23T23_49_35_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_uhgngp.mp3' },
+  { id:20, cat:'fruits',  emoji:'🍎',  word:'Apple',       translation:'Maçã',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079814/ElevenLabs_2026-04-23T23_49_46_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_qquzii.mp3' },
+  { id:21, cat:'fruits',  emoji:'🍉',  word:'Watermelon',  translation:'Melancia', audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079812/ElevenLabs_2026-04-23T23_50_00_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_shml6o.mp3' },
+
+  // ── FAMILY (5) ──
+  { id:22, cat:'family',  emoji:'👨',  word:'Father',  translation:'Pai',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079809/ElevenLabs_2026-04-23T23_50_17_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_ihqfoi.mp3' },
+  { id:23, cat:'family',  emoji:'👩',  word:'Mother',  translation:'Mãe',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079807/ElevenLabs_2026-04-23T23_50_28_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_zfnhgl.mp3' },
+  { id:24, cat:'family',  emoji:'👦',  word:'Brother', translation:'Irmão',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079805/ElevenLabs_2026-04-23T23_50_37_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_uzikeq.mp3' },
+  { id:25, cat:'family',  emoji:'👧',  word:'Sister',  translation:'Irmã',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079802/ElevenLabs_2026-04-23T23_50_45_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_tcdxd7.mp3' },
+  { id:26, cat:'family',  emoji:'👶',  word:'Baby',    translation:'Bebê',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079800/ElevenLabs_2026-04-23T23_50_55_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_uhqwrd.mp3' },
+
+  // ── NUMBERS (10) ──
+  { id:27, cat:'numbers', emoji:'1️⃣',  word:'One',   translation:'Um',     audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079797/ElevenLabs_2026-04-23T23_51_08_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_aleojx.mp3' },
+  { id:28, cat:'numbers', emoji:'2️⃣',  word:'Two',   translation:'Dois',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079795/ElevenLabs_2026-04-23T23_51_15_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_d4rta0.mp3' },
+  { id:29, cat:'numbers', emoji:'3️⃣',  word:'Three', translation:'Três',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079793/ElevenLabs_2026-04-23T23_51_24_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_g9kdqt.mp3' },
+  { id:30, cat:'numbers', emoji:'4️⃣',  word:'Four',  translation:'Quatro', audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079790/ElevenLabs_2026-04-23T23_51_33_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_elkkbf.mp3' },
+  { id:31, cat:'numbers', emoji:'5️⃣',  word:'Five',  translation:'Cinco',  audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079788/ElevenLabs_2026-04-23T23_51_39_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_x1qt4y.mp3' },
+  { id:32, cat:'numbers', emoji:'6️⃣',  word:'Six',   translation:'Seis',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079785/ElevenLabs_2026-04-23T23_51_47_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_oxj8zd.mp3' },
+  { id:33, cat:'numbers', emoji:'7️⃣',  word:'Seven', translation:'Sete',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079783/ElevenLabs_2026-04-23T23_51_53_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_caw9cx.mp3' },
+  { id:34, cat:'numbers', emoji:'8️⃣',  word:'Eight', translation:'Oito',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079780/ElevenLabs_2026-04-23T23_52_00_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_qno471.mp3' },
+  { id:35, cat:'numbers', emoji:'9️⃣',  word:'Nine',  translation:'Nove',   audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079778/ElevenLabs_2026-04-23T23_52_07_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_uwumoh.mp3' },
+  { id:36, cat:'numbers', emoji:'🔟',  word:'Ten',   translation:'Dez',    audioSrc:'https://res.cloudinary.com/dan8jzcgn/video/upload/v1777079776/ElevenLabs_2026-04-23T23_52_13_primeiro_ingles_divertido_gen_sp100_s50_sb75_se0_b_m2_ld09zc.mp3' },
+];
+
+const catLabels = {
+  colors:'Colors', family:'Family', fruits:'Fruits', animals:'Animals', numbers:'Numbers'
+};
+
+let activeTab = 'all';
+let searchText = '';
+const audioCache = {};
+let currentId = null;
+
+function render() {
+  const grid = document.getElementById('grid');
+  const list = words.filter(w => {
+    const matchTab  = activeTab === 'all' || w.cat === activeTab;
+    const matchText = w.word.toLowerCase().includes(searchText) ||
+                      w.translation.toLowerCase().includes(searchText);
+    return matchTab && matchText;
+  });
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty"><span>🔍</span>Nenhuma palavra encontrada.</div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map((w, i) => `
+    <div class="card" style="animation-delay:${i * 0.045}s">
+      <div class="emoji-circle">${w.emoji}</div>
+      <div class="card-info">
+        <div class="card-word">${w.word}</div>
+        <div class="translation">&#127463;&#127479; ${w.translation}</div>
+      </div>
+      <button class="play-btn" id="btn-${w.id}" onclick="togglePlay(${w.id},'${esc(w.audioSrc)}')">&#9654;</button>
+    </div>
+  `).join('');
+}
+
+function esc(s){ return (s||'').replace(/'/g,"\\'"); }
+
+function getAudio(id, src) {
+  if (!audioCache[id]) {
+    if (!src) { alert('Áudio ainda não adicionado para esta palavra.'); return null; }
+    const a = new Audio(src);
+        a.addEventListener('ended', () => resetPlayer(id));
+    audioCache[id] = a;
+  }
+  return audioCache[id];
+}
+
+function togglePlay(id, src) {
+  const audio = getAudio(id, src);
+  if (!audio) return;
+  if (currentId && currentId !== id) stopPlayer(currentId);
+  if (audio.paused) {
+    audio.play();
+    document.getElementById('btn-'+id).textContent = '⏸';
+    currentId = id;
+  } else {
+    audio.pause();
+    document.getElementById('btn-'+id).textContent = '▶';
+    currentId = null;
+  }
+}
+
+
+function stopPlayer(id) {
+  const a = audioCache[id];
+  if (!a) return;
+  a.pause(); a.currentTime = 0;
+  resetPlayer(id);
+}
+
+function resetPlayer(id) {
+  const btn = document.getElementById('btn-'+id);
+  if (btn) btn.textContent = '▶';
+  currentId = null;
+}
+
+function fmt(s) {
+  const m = Math.floor(s/60), sec = Math.floor(s%60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function filterTab(cat, btn) {
+  activeTab = cat;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function filterCards() {
+  searchText = document.getElementById('searchInput').value.toLowerCase().trim();
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
